@@ -52,24 +52,76 @@ const register = async (req, res) => {
   }
 
   try {
-    const user = await User.create({
+    User.create ({
       first_name,
       last_name,
       email,
       username,
       password,
-    });
+    })
+    .then((data) => {
+      return res.status(201).json({
+        result: 'success',
+        message: 'User has been successfully created',
+        data: data,
+      });
+    })
 
-    return res.status(201).json({
-      result: 'success',
-      message: 'Congratulations, your account has been successfully created.',
-      data: {
-        first_name,
-        last_name,
-        email,
-        username,
-      },
-    });
+//   User.create({}).then((user)=> {
+//     if (user) res.status(201).json({
+//         result: 'Success',
+//         message: 'Congratulations, your account has been successfully created.',
+//         data:  {
+//                first_name: user.first_name,
+//                last_name: user.last_name,
+//                email: user.email,
+//                username: user.username,
+//                password: hashedPasswor,
+//          }
+//     })
+//  });
+
+//   User.create({}).then((user)=> {
+//     if (user) res.status(201).json({
+//         result: 'Success',
+//         message: 'Congratulations, your account has been successfully created.',
+//         data:  {
+//                first_name: user.first_name,
+//                last_name: user.last_name,
+//                email: user.email,
+//                username: user.username,
+//                password: hashedPassword,
+//          }
+//     })
+//  });
+
+
+  //   User.create({}).then((user)=> {
+  //     if (user)          res.status(201).json({
+  //         result: 'Success',
+  //         message: 'Congratulations, your account has been successfully created.',
+  //         data:  {
+  //                first_name: user.first_name,
+  //                last_name: user.last_name,
+  //                email: user.email,
+  //                username: user.username,
+  //                password: hashedPasswor,
+  //          }
+  //     })
+  //  });
+
+    // return res.status(201).json({
+    //   result: 'success',
+    //   message: 'Congratulations, your account has been successfully created.',
+    //   data: {
+    //     first_name,
+    //     last_name,
+    //     email,
+    //     username,
+    //   },
+    // }); 
+
+
   } catch (err) {
     return res.status(400).json({
       result: 'failed',
